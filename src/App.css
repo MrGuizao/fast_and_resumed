@@ -7,3 +7,26 @@
   font-size: 100%;
 
 }
+
+.line {
+  margin-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-flow: row nowrap;
+  background-color: burlywood;
+  border-radius: 8px;
+  padding: 12px;
+  width: 800px;
+}
+
+.line li,
+span {
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+span {
+  text-transform: uppercase;
+  cursor: pointer;
+}
