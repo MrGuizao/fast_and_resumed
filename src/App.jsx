@@ -1,45 +1,24 @@
-import { useState, useEffect } from 'react'
+import { useState, createContext } from "react";
+import { BrowserRouter as Router } from "react-router-dom";
+import Navbar from "./Navbar";
+import Routs from "./Routs";
+
+
+export const AppContext = createContext();
 
 const App = () => {
-
-  const [todos, setTodos] = useState([]);
-  const [task, setTask] = useState('');
-  const [isClicked, setIsClicked] = useState(null);
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    setTodos([...todos, { id: crypto.randomUUID(), task }])
-    setTask('')
-  }
-
-  const handleChange = e => setTask(e.target.value);
-  const handleClick = id => setIsClicked(id);
-  const deleteTask = id => setTodos(todos.filter(todo => todo.id !== id));
+  const [data, setData] = useState({ name: "Guilherme", idade: 27 });
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <input type="text" value={task} onChange={handleChange} />
-        <button>add</button>
-      </form>
-      <ul>
-        {
-          todos.map(todo => {
-            return (
-              <div
-                key={todo.id}
-                style={isClicked === todo.id ? { color: 'red' } : null}>
-                <li onClick={() => handleClick(todo.id)}
-                >{todo.task}</li>
-                <span onClick={() => deleteTask(todo.id)}>X</span>
-              </div>
-            )
-          }
-          )
-        }
-      </ul>
-    </>
-  )
-}
+    <div className="App">
+      <AppContext.Provider value={{ data, setData }}>
+        <Router>
+          <Navbar />
+          <Routs />
+        </Router>
+      </AppContext.Provider>
+    </div>
+  );
+};
 
 export default App;
